@@ -6,8 +6,12 @@ import time
 import sys
 import re
 import os
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 
 API = 'https://www.1secmail.com/api/v1/'
+GEOGUESSR = 'https://www.geoguessr.com/signup'
+PASSWD = 'Bittu@1234'
 domainList = ['1secmail.com', '1secmail.net', '1secmail.org']
 domain = random.choice(domainList)
 
@@ -61,27 +65,39 @@ def checkMails():
 
 
 if __name__ == '__main__':
-    try:
-        newMail = f"{API}?login={generateUserName()}&domain={domain}"
-        reqMail = requests.get(newMail)
-        mail = f"{extract()[0]}@{extract()[1]}"
-        pyperclip.copy(mail)
+    newMail = f"{API}?login={generateUserName()}&domain={domain}"
+    # reqMail = requests.get(newMail)
+    mail = f"{extract()[0]}@{extract()[1]}"
+    pyperclip.copy(mail)
 
-        reset_url = None
-        while reset_url == None:
-            reset_url = checkMails()
-            time.sleep(5)
+    driver = webdriver.Chrome()
+    driver.get(GEOGUESSR)
+    elem = driver.find_element_by_xpath("/html/body/div[1]/div/main/div/div/div/div/div/form/div/div[1]/div[2]/input")
+    elem.send_keys(mail)
+    elem.send_keys(Keys.RETURN)
 
-        print(reset_url)
+    reset_url = None
+    while reset_url == None:
+        reset_url = checkMails()
+        time.sleep(5)
+    print(reset_url)
+    driver.get(reset_url)
 
-    except:
-        pass
+    elem = driver.find_element_by_xpath("/html/body/div/div/main/form/section/section[2]/div/div[1]/div[2]/input")
+    elem.send_keys(PASSWD)
+    elem = driver.find_element_by_xpath("/html/body/div/div/main/form/section/section[2]/div/div[2]/div[2]/input")
+    elem.send_keys(PASSWD)
+    elem.send_keys(Keys.RETURN)
 
+    elem = driver.find_element_by_xpath("/html/body/div/div/aside/div/ul[1]/li[3]/a/span[1]/div")
+    elem.click()
 
+    elem = driver.find_element_by_xpath("/html/body/div/div/main/div/div/div[2]/section/section[1]/div/div/div[2]/div/a")
+    elem.click()
 
+    elem = driver.find_element_by_xpath("/html/body/div/div/main/div/div/div/div/div/div/div[2]/article/div[4]/button")
+    elem.click()
 
+    # /html/body/div/div/main/div/div/div/div/div/div/div[2]/article/div[4]/button
 
-
-
-
-
+    # driver.close()
