@@ -1,11 +1,9 @@
-import pyperclip
 import requests
 import random
 import string
 import time
-import sys
 import re
-import os
+
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
