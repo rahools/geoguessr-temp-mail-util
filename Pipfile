@@ -4,8 +4,8 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-pyperclip = "==1.8.0"
-requests = "==2.21.0"
+selenium = "*"
+requests = "*"
 
 [dev-packages]
 
