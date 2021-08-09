@@ -1,0 +1,13 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pyperclip = "==1.8.0"
+requests = "==2.21.0"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
