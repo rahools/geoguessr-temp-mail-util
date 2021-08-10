@@ -84,6 +84,7 @@ if __name__ == '__main__':
         time.sleep(5)
     print(f'Reg Link: {reset_url}')
     driver.get(reset_url)
+
     # set password
     elem = driver.find_element_by_xpath("/html/body/div/div/main/form/section/section[2]/div/div[1]/div[2]/input")
     elem.send_keys(PASSWD)
@@ -91,21 +92,26 @@ if __name__ == '__main__':
     elem.send_keys(PASSWD)
     elem.send_keys(Keys.RETURN)
 
+    # navigate to homepage
     elem = driver.find_element_by_xpath("/html/body/div/div/aside/div/ul[1]/li[3]/a")
     elem.click()
     time.sleep(2)
 
+    # avoid race condition
     driver.refresh()
     time.sleep(1)
 
+    # navigate to country streak
     elem = driver.find_element_by_xpath("/html/body/div/div/main/div/div/div[2]/section/section[1]/div/div/div[2]/div/a")
     elem.click()
     time.sleep(1)
 
+    # start country streak
     elem = driver.find_element_by_xpath("/html/body/div/div/main/div/div/div/div/div/div/div[2]/article/div[4]/button")
     elem.click()
     time.sleep(1)
     
+    # start country streak
     elem = driver.find_element_by_xpath("/html/body/div/section/div/div[2]/button[1]")
     elem.click()
 
